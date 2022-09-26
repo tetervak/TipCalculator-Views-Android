@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="ca.tetervak.tipcalculator.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:name="ca.tetervak.tipcalculator.CalculatorFragment"
+        android:label="@string/calculator_fragment_label"
+        tools:layout="@layout/fragment_calculator">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
