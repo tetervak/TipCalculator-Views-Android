@@ -1,4 +1,4 @@
-package ca.tetervak.tipcalculator
+package ca.tetervak.tipcalculator.ui.history
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import ca.tetervak.tipcalculator.R
 import ca.tetervak.tipcalculator.databinding.FragmentHistoryBinding
 
 /**

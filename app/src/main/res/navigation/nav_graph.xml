@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="ca.tetervak.tipcalculator.HistoryFragment"
+        android:name="ca.tetervak.tipcalculator.ui.history.HistoryFragment"
         android:label="@string/history_fragment_label"
         tools:layout="@layout/fragment_history">
 
