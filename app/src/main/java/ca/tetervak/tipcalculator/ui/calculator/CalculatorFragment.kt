@@ -7,12 +7,14 @@ import android.widget.*
 import androidx.core.view.MenuProvider
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import ca.tetervak.tipcalculator.R
 import ca.tetervak.tipcalculator.databinding.FragmentCalculatorBinding
 import ca.tetervak.tipcalculator.model.ServiceQuality
 import java.text.NumberFormat
 
-class CalculatorFragment : Fragment() {
+class CalculatorFragment : Fragment(), MenuProvider {
 
     private var _binding: FragmentCalculatorBinding? = null
     private val binding get() = _binding!!
@@ -98,19 +100,8 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun setupFragmentMenu() {
-        requireActivity().addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.menu_calculator, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-                    R.id.action_history -> true
-                    else -> false
-                }
-            }
-
-        })
+        requireActivity().addMenuProvider(
+            this, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun hideOutputs() {
@@ -127,5 +118,19 @@ class CalculatorFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.menu_calculator, menu)
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            R.id.action_history -> {
+                findNavController().navigate(R.id.action_global_historyFragment)
+                true
+            }
+            else -> false
+        }
     }
 }

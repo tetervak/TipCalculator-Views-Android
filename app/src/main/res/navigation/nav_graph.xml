@@ -3,26 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    android:label="@string/calculator_fragment_label"
+    app:startDestination="@id/calculatorFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/calculatorFragment"
         android:name="ca.tetervak.tipcalculator.ui.calculator.CalculatorFragment"
         android:label="@string/calculator_fragment_label"
-        tools:layout="@layout/fragment_calculator">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_calculator" />
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/historyFragment"
         android:name="ca.tetervak.tipcalculator.ui.history.HistoryFragment"
         android:label="@string/history_fragment_label"
-        tools:layout="@layout/fragment_history">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_history" />
+    <dialog
+        android:id="@+id/aboutFragment"
+        android:name="ca.tetervak.tipcalculator.ui.dialogs.AboutFragment"
+        android:label="AboutFragment" />
+    <action android:id="@+id/action_global_aboutFragment" app:destination="@id/aboutFragment" /><action android:id="@+id/action_global_historyFragment" app:destination="@id/historyFragment"/>
 </navigation>
