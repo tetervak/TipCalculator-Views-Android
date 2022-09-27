@@ -44,7 +44,7 @@
                 android:layout_marginStart="8dp"
                 android:ems="5"
                 android:importantForAutofill="no"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:minHeight="48dp"
                 tools:ignore="DuplicateSpeakableTextCheck" />
         </TableRow>
@@ -55,15 +55,15 @@
             android:layout_marginTop="16dp">
 
             <TextView
-                android:id="@+id/quality_of_service_label"
+                android:id="@+id/service_quality_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/quality_of_service"
+                android:text="@string/service_quality"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
             <Spinner
-                android:id="@+id/quality_of_service_spinner"
+                android:id="@+id/service_quality_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

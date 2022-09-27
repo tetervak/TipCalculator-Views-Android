@@ -7,4 +7,5 @@
     android:textColor="@color/black"
     android:paddingStart="8dp"
     android:paddingEnd="8dp"
+    android:minHeight="48dp"
     tools:text="Good (18%)"/>
