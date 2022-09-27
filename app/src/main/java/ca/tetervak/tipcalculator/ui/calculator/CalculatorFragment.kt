@@ -28,6 +28,11 @@ class CalculatorFragment : Fragment(), MenuProvider {
 
         _binding = FragmentCalculatorBinding.inflate(inflater, container, false)
 
+        // setup fragment menu
+        requireActivity().addMenuProvider(
+            this, viewLifecycleOwner, Lifecycle.State.RESUMED
+        )
+
         // setup the spinner with the adapter
         val spinnerAdapter = ArrayAdapter.createFromResource(
             requireContext(), R.array.quality_input_items, R.layout.quality_input_item
@@ -40,50 +45,9 @@ class CalculatorFragment : Fragment(), MenuProvider {
 
         viewModel.liveUiState.observe(viewLifecycleOwner) { uiState ->
             with(binding) {
-                if (uiState.showOutputs) {
-                    outputTable.visibility = View.VISIBLE
-                } else {
-                    outputTable.visibility = View.INVISIBLE
-                }
                 tipAmountOutput.text = formatCurrency(uiState.tipAmount)
                 billTotalOutput.text = formatCurrency(uiState.billTotal)
             }
-        }
-
-        // setup fragment menu
-        requireActivity().addMenuProvider(
-            this, viewLifecycleOwner, Lifecycle.State.RESUMED
-        )
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        // hide outputs when the inputs are changed
-
-        binding.costOfServiceInput.addTextChangedListener {
-            viewModel.setHideOutputs()
-        }
-
-        binding.serviceQualitySpinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    viewModel.setHideOutputs()
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    // nothing to do
-                }
-            }
-        binding.roundUpTipSwitch.setOnCheckedChangeListener { _, _ ->
-            viewModel.setHideOutputs()
         }
 
         binding.calculateButton.setOnClickListener {
@@ -103,6 +67,7 @@ class CalculatorFragment : Fragment(), MenuProvider {
             }
         }
 
+        return binding.root
     }
 
     private fun formatCurrency(value: Double) =

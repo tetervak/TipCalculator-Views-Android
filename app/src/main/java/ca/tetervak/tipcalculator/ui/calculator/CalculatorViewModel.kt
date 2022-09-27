@@ -22,15 +22,7 @@ class CalculatorViewModel : ViewModel() {
         val uiState = _liveUiState.value
         _liveUiState.value = uiState?.copy(
             tipAmount = tipData.tipAmount,
-            billTotal = tipData.billTotal,
-            showOutputs = true
-        )
-    }
-
-    fun setHideOutputs(){
-        val uiState = _liveUiState.value
-        _liveUiState.value = uiState?.copy(
-            showOutputs = false
+            billTotal = tipData.billTotal
         )
     }
 
