@@ -38,10 +38,33 @@ class CalculatorFragment : Fragment(), MenuProvider {
             setSelection(1) // select Good (18%)
         }
 
+        viewModel.liveUiState.observe(viewLifecycleOwner) { uiState ->
+            with(binding) {
+                if (uiState.showOutputs) {
+                    outputTable.visibility = View.VISIBLE
+                } else {
+                    outputTable.visibility = View.INVISIBLE
+                }
+                tipAmountOutput.text = formatCurrency(uiState.tipAmount)
+                billTotalOutput.text = formatCurrency(uiState.billTotal)
+            }
+        }
+
+        // setup fragment menu
+        requireActivity().addMenuProvider(
+            this, viewLifecycleOwner, Lifecycle.State.RESUMED
+        )
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         // hide outputs when the inputs are changed
 
         binding.costOfServiceInput.addTextChangedListener {
-            viewModel.setShowOutputs(false)
+            viewModel.setHideOutputs()
         }
 
         binding.serviceQualitySpinner.onItemSelectedListener =
@@ -52,7 +75,7 @@ class CalculatorFragment : Fragment(), MenuProvider {
                     position: Int,
                     id: Long
                 ) {
-                    viewModel.setShowOutputs(false)
+                    viewModel.setHideOutputs()
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -60,7 +83,7 @@ class CalculatorFragment : Fragment(), MenuProvider {
                 }
             }
         binding.roundUpTipSwitch.setOnCheckedChangeListener { _, _ ->
-            viewModel.setShowOutputs(false)
+            viewModel.setHideOutputs()
         }
 
         binding.calculateButton.setOnClickListener {
@@ -75,45 +98,11 @@ class CalculatorFragment : Fragment(), MenuProvider {
                     }
                 val roundUpTip = binding.roundUpTipSwitch.isChecked
                 viewModel.calculate(costOfService, qualityOfService, roundUpTip)
-                viewModel.setShowOutputs(true)
             } catch (e: NumberFormatException) {
                 binding.costOfServiceInput.error = getString(R.string.invalid_input)
             }
         }
 
-        viewModel.liveShowOutputs.observe(viewLifecycleOwner) { showOutputs ->
-            if (showOutputs) {
-                showOutputs()
-            } else {
-                hideOutputs()
-            }
-        }
-
-        viewModel.liveTipAmount.observe(viewLifecycleOwner) { tipAmount ->
-            binding.tipAmountOutput.text = formatCurrency(tipAmount)
-        }
-
-        viewModel.liveBillTotal.observe(viewLifecycleOwner) { billTotal ->
-            binding.billTotalOutput.text = formatCurrency(billTotal)
-        }
-
-        setupFragmentMenu()
-
-        return binding.root
-    }
-
-    private fun setupFragmentMenu() {
-        requireActivity().addMenuProvider(
-            this, viewLifecycleOwner, Lifecycle.State.RESUMED
-        )
-    }
-
-    private fun hideOutputs() {
-        binding.outputTable.visibility = View.INVISIBLE
-    }
-
-    private fun showOutputs() {
-        binding.outputTable.visibility = View.VISIBLE
     }
 
     private fun formatCurrency(value: Double) =
