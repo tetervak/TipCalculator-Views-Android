@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="ca.tetervak.tipcalculator.ui.calculator.CalculatorViewModel" />
     </data>
 
     <LinearLayout
@@ -134,6 +136,7 @@
                     android:layout_marginStart="8dp"
                     android:textColor="@color/purple_500"
                     android:textSize="20sp"
+                    currencyValue="@{viewModel.liveUiState.tipAmount}"
                     tools:text="$2.00" />
             </TableRow>
 
@@ -158,6 +161,7 @@
                     android:layout_marginStart="8dp"
                     android:textColor="@color/purple_500"
                     android:textSize="20sp"
+                    currencyValue="@{viewModel.liveUiState.billTotal}"
                     tools:text="$18.27" />
             </TableRow>
 

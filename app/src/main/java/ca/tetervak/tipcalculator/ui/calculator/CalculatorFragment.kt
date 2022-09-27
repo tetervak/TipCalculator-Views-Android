@@ -5,14 +5,12 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.*
 import androidx.core.view.MenuProvider
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import ca.tetervak.tipcalculator.R
 import ca.tetervak.tipcalculator.databinding.FragmentCalculatorBinding
 import ca.tetervak.tipcalculator.model.ServiceQuality
-import java.text.NumberFormat
 
 class CalculatorFragment : Fragment(), MenuProvider {
 
@@ -43,12 +41,8 @@ class CalculatorFragment : Fragment(), MenuProvider {
             setSelection(1) // select Good (18%)
         }
 
-        viewModel.liveUiState.observe(viewLifecycleOwner) { uiState ->
-            with(binding) {
-                tipAmountOutput.text = formatCurrency(uiState.tipAmount)
-                billTotalOutput.text = formatCurrency(uiState.billTotal)
-            }
-        }
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         binding.calculateButton.setOnClickListener {
             val costOfServiceInput = binding.costOfServiceInput.text.toString()
@@ -69,9 +63,6 @@ class CalculatorFragment : Fragment(), MenuProvider {
 
         return binding.root
     }
-
-    private fun formatCurrency(value: Double) =
-        NumberFormat.getCurrencyInstance().format(value)
 
     override fun onDestroyView() {
         super.onDestroyView()
