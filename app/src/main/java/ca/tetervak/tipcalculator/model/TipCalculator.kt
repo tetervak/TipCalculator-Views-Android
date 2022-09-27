@@ -35,7 +35,6 @@ class TipCalculator {
         get() = TipData(
             costOfService = costOfService,
             serviceQuality = serviceQuality,
-            tipPercentage = tipPercentage,
             roundUpTip = roundUpTip,
             tipAmount = tipAmount,
             billTotal = costOfService + tipAmount
