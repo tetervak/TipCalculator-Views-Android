@@ -10,9 +10,6 @@ import androidx.navigation.fragment.findNavController
 import ca.tetervak.tipcalculator.R
 import ca.tetervak.tipcalculator.databinding.FragmentHistoryBinding
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 class HistoryFragment : Fragment() {
 
     private var _binding: FragmentHistoryBinding? = null

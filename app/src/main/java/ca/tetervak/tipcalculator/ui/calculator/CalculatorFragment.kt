@@ -1,11 +1,10 @@
 package ca.tetervak.tipcalculator.ui.calculator
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.*
+import androidx.core.view.MenuProvider
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import ca.tetervak.tipcalculator.R
@@ -13,9 +12,6 @@ import ca.tetervak.tipcalculator.databinding.FragmentCalculatorBinding
 import ca.tetervak.tipcalculator.model.ServiceQuality
 import java.text.NumberFormat
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class CalculatorFragment : Fragment() {
 
     private var _binding: FragmentCalculatorBinding? = null
@@ -96,7 +92,25 @@ class CalculatorFragment : Fragment() {
             binding.billTotalOutput.text = formatCurrency(billTotal)
         }
 
+        setupFragmentMenu()
+
         return binding.root
+    }
+
+    private fun setupFragmentMenu() {
+        requireActivity().addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_calculator, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.action_history -> true
+                    else -> false
+                }
+            }
+
+        })
     }
 
     private fun hideOutputs() {
