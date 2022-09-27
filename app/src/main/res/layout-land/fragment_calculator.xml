@@ -1,172 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="top"
-    android:orientation="horizontal"
-    tools:context=".ui.calculator.CalculatorFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tip_calculator_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/tip_calculator"
-            android:textColor="@color/pink_500"
-            android:textSize="24sp" />
-
-        <TableLayout
-            android:id="@+id/input_table"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/cost_of_service_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:labelFor="@id/cost_of_service_input"
-                    android:text="@string/cost_of_service"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <EditText
-                    android:id="@+id/cost_of_service_input"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:ems="5"
-                    android:importantForAutofill="no"
-                    android:inputType="numberDecimal"
-                    android:minHeight="48dp"
-                    tools:ignore="DuplicateSpeakableTextCheck" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp">
-
-                <TextView
-                    android:id="@+id/service_quality_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/service_quality"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <Spinner
-                    android:id="@+id/service_quality_spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:minHeight="48dp"
-                    tools:listitem="@layout/quality_input_item" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/round_up_tip_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_span="2"
-                    android:checked="true"
-                    android:text="@string/round_up_tip"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-            </TableRow>
-
-        </TableLayout>
-    </LinearLayout>
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="1dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?android:attr/listDivider" />
+        android:gravity="top"
+        android:orientation="horizontal"
+        tools:context=".ui.calculator.CalculatorFragment">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/calculate_button"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/calculate" />
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <TableLayout
-            android:id="@+id/output_table"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp">
+            <TextView
+                android:id="@+id/tip_calculator_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/tip_calculator"
+                android:textColor="@color/pink_500"
+                android:textSize="24sp" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/tip_amount_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tip_amount"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/tip_amount_output"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:textColor="@color/purple_500"
-                    android:textSize="20sp"
-                    tools:text="$2.00" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <TableLayout
+                android:id="@+id/input_table"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp">
 
-                <TextView
-                    android:id="@+id/bill_total_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:text="@string/bill_total"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/bill_total_output"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:textColor="@color/purple_500"
-                    android:textSize="20sp"
-                    tools:text="$18.27" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/cost_of_service_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:labelFor="@id/cost_of_service_input"
+                        android:text="@string/cost_of_service"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
 
-        </TableLayout>
+                    <EditText
+                        android:id="@+id/cost_of_service_input"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:ems="5"
+                        android:importantForAutofill="no"
+                        android:inputType="numberDecimal"
+                        android:minHeight="48dp"
+                        tools:ignore="DuplicateSpeakableTextCheck" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:id="@+id/service_quality_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/service_quality"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <Spinner
+                        android:id="@+id/service_quality_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:minHeight="48dp"
+                        tools:listitem="@layout/quality_input_item" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/round_up_tip_switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="2"
+                        android:checked="true"
+                        android:text="@string/round_up_tip"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+                </TableRow>
+
+            </TableLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="?android:attr/listDivider" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/calculate_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/calculate" />
+
+            <TableLayout
+                android:id="@+id/output_table"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tip_amount_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tip_amount"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tip_amount_output"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textColor="@color/purple_500"
+                        android:textSize="20sp"
+                        tools:text="$2.00" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:id="@+id/bill_total_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="@string/bill_total"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/bill_total_output"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textColor="@color/purple_500"
+                        android:textSize="20sp"
+                        tools:text="$18.27" />
+                </TableRow>
+
+            </TableLayout>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</layout>
