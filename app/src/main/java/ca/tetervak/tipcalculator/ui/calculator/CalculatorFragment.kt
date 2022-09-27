@@ -30,10 +30,13 @@ class CalculatorFragment : Fragment(), MenuProvider {
 
         // setup the spinner with the adapter
         val spinnerAdapter = ArrayAdapter.createFromResource(
-            requireContext(), R.array.quality_input_items, R.layout.quality_input_item)
+            requireContext(), R.array.quality_input_items, R.layout.quality_input_item
+        )
         spinnerAdapter.setDropDownViewResource(R.layout.quality_input_item)
-        binding.serviceQualitySpinner.adapter = spinnerAdapter
-        binding.serviceQualitySpinner.setSelection(1) // select Good (18%)
+        with(binding.serviceQualitySpinner) {
+            adapter = spinnerAdapter
+            setSelection(1) // select Good (18%)
+        }
 
         // hide outputs when the inputs are changed
 
@@ -73,13 +76,13 @@ class CalculatorFragment : Fragment(), MenuProvider {
                 val roundUpTip = binding.roundUpTipSwitch.isChecked
                 viewModel.calculate(costOfService, qualityOfService, roundUpTip)
                 viewModel.setShowOutputs(true)
-            } catch (e: NumberFormatException){
+            } catch (e: NumberFormatException) {
                 binding.costOfServiceInput.error = getString(R.string.invalid_input)
             }
         }
 
-        viewModel.liveShowOutputs.observe(viewLifecycleOwner){ showOutputs ->
-            if(showOutputs) {
+        viewModel.liveShowOutputs.observe(viewLifecycleOwner) { showOutputs ->
+            if (showOutputs) {
                 showOutputs()
             } else {
                 hideOutputs()
@@ -101,7 +104,8 @@ class CalculatorFragment : Fragment(), MenuProvider {
 
     private fun setupFragmentMenu() {
         requireActivity().addMenuProvider(
-            this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+            this, viewLifecycleOwner, Lifecycle.State.RESUMED
+        )
     }
 
     private fun hideOutputs() {
