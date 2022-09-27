@@ -68,7 +68,7 @@ class CalculatorFragment : Fragment() {
                         1 -> ServiceQuality.GOOD
                         else -> ServiceQuality.OK
                     }
-                val roundUpTip = binding.roundUpTipSwitch.isSelected
+                val roundUpTip = binding.roundUpTipSwitch.isChecked
                 viewModel.calculate(costOfService, qualityOfService, roundUpTip)
                 viewModel.setShowOutputs(true)
             } catch (e: NumberFormatException){

@@ -1,6 +1,12 @@
 <resources>
-    <string name="app_name">TipCalculator</string>
+    <string name="app_name">Tip Calculator</string>
     <string name="action_settings">Settings</string>
+
+    <!-- about dialog -->
+    <string name="author">Alex Tetervak, Sheridan College, 2022</string>
+
+
+
     <!-- Strings used for fragments for navigation -->
     <string name="calculator_fragment_label">Calculator</string>
     <string name="history_fragment_label">History</string>
