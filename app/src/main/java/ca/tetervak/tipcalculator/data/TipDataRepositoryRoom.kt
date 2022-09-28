@@ -29,6 +29,10 @@ class TipDataRepositoryRoom @Inject constructor(
     override suspend fun getTipDataById(id: Int) =
         tipDataDao.getTipDataEntityById(id).toTipData()
 
+    override suspend fun deleteAllTipData() {
+        tipDataDao.deleteAllTipDataEntities()
+    }
+
     init {
         Log.d("DependencyInjection", "TipDataRepositoryRoom is created")
     }

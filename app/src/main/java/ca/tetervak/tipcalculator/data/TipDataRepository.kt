@@ -12,4 +12,6 @@ interface TipDataRepository {
     suspend fun insertTipData(tipData: TipData)
 
     suspend fun deleteTipDataById(id: Int)
+
+    suspend fun deleteAllTipData()
 }

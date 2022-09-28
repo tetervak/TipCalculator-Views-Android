@@ -2,6 +2,7 @@ package ca.tetervak.tipcalculator.data
 
 import android.content.Context
 import android.util.Log
+import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,6 +24,10 @@ object DatabaseModule {
     @Provides
     fun provideTipDatabase(@ApplicationContext context: Context): TipDatabase {
         Log.d("DependencyInjection","provide TipDatabase")
-        return TipDatabase.getDatabase(context)
+        return Room.databaseBuilder(
+            context.applicationContext,
+            TipDatabase::class.java,
+            "tip_database"
+        ).build()
     }
 }

@@ -23,4 +23,7 @@ interface TipDataDao {
 
     @Query("DELETE FROM tip_data WHERE id=:id")
     suspend fun deleteTipDataEntityById(id: Int)
+
+    @Query("DELETE FROM tip_data")
+    suspend fun deleteAllTipDataEntities()
 }

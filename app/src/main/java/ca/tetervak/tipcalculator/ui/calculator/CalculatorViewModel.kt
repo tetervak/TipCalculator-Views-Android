@@ -4,10 +4,14 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import ca.tetervak.tipcalculator.data.TipDataRepository
 import ca.tetervak.tipcalculator.model.ServiceQuality
 import ca.tetervak.tipcalculator.model.TipCalculator
+import ca.tetervak.tipcalculator.model.TipData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,6 +35,13 @@ class CalculatorViewModel @Inject constructor(
             tipAmount = tipData.tipAmount,
             billTotal = tipData.billTotal
         )
+        saveTipData(tipData)
+    }
+
+    fun saveTipData(tipData: TipData){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.insertTipData(tipData)
+        }
     }
 
     init {

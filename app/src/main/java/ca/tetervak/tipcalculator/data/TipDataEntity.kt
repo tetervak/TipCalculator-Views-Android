@@ -10,6 +10,7 @@ import java.util.*
 data class TipDataEntity(
 
     @PrimaryKey(autoGenerate = true)
+    // using the default column name
     val id: Int = 0,
 
     @ColumnInfo(name = "cost")
@@ -27,5 +28,6 @@ data class TipDataEntity(
     @ColumnInfo(name = "bill_total")
     val billTotal: Double,
 
+    // using the default column name
     val date: Date
 )
