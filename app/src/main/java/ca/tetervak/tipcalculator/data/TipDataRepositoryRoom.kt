@@ -1,5 +1,6 @@
 package ca.tetervak.tipcalculator.data
 
+import android.util.Log
 import ca.tetervak.tipcalculator.model.TipData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -27,6 +28,10 @@ class TipDataRepositoryRoom @Inject constructor(
 
     override suspend fun getTipDataById(id: Int) =
         tipDataDao.getTipDataEntityById(id).toTipData()
+
+    init {
+        Log.d("DependencyInjection", "TipDataRepositoryRoom is created")
+    }
 }
 
 fun TipData.toTipDataEntity() = TipDataEntity(

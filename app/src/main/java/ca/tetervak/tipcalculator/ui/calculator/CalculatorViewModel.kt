@@ -1,5 +1,6 @@
 package ca.tetervak.tipcalculator.ui.calculator
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,6 +31,10 @@ class CalculatorViewModel @Inject constructor(
             tipAmount = tipData.tipAmount,
             billTotal = tipData.billTotal
         )
+    }
+
+    init {
+       Log.d("DependencyInjection", "CalculatorViewModel is created")
     }
 
 }

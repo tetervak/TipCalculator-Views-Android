@@ -2,7 +2,8 @@
 buildscript {
     dependencies {
         // Needed for the dependency injection
-        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.40.1'
+        //classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10"
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.42'
     }
 }
 

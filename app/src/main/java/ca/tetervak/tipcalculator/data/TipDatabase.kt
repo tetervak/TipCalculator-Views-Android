@@ -1,6 +1,7 @@
 package ca.tetervak.tipcalculator.data
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -29,6 +30,7 @@ abstract class TipDatabase : RoomDatabase() {
                     "tip_database"
                 ).build()
                 INSTANCE = instance
+                Log.d("DependencyInjection","TipDatabase is created")
                 // return instance
                 instance
             }
