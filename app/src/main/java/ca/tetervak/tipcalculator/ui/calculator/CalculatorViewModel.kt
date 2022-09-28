@@ -3,10 +3,16 @@ package ca.tetervak.tipcalculator.ui.calculator
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import ca.tetervak.tipcalculator.data.TipDataRepository
 import ca.tetervak.tipcalculator.model.ServiceQuality
 import ca.tetervak.tipcalculator.model.TipCalculator
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class CalculatorViewModel : ViewModel() {
+@HiltViewModel
+class CalculatorViewModel @Inject constructor(
+    private val repository: TipDataRepository
+) : ViewModel() {
 
     val tipCalculator = TipCalculator()
 

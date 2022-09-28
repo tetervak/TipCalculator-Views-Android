@@ -11,7 +11,9 @@ import androidx.navigation.fragment.findNavController
 import ca.tetervak.tipcalculator.R
 import ca.tetervak.tipcalculator.databinding.FragmentCalculatorBinding
 import ca.tetervak.tipcalculator.model.ServiceQuality
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CalculatorFragment : Fragment(), MenuProvider {
 
     private var _binding: FragmentCalculatorBinding? = null
