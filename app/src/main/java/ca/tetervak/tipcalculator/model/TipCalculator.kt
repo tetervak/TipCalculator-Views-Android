@@ -6,7 +6,7 @@ class TipCalculator {
     private var serviceQuality: ServiceQuality = ServiceQuality.OK
     private var roundUpTip: Boolean = true
 
-    fun calculate (
+    fun calculate(
         costOfService: Double,
         serviceQuality: ServiceQuality,
         roundUpTip: Boolean
@@ -14,7 +14,7 @@ class TipCalculator {
         this.costOfService = costOfService
         this.serviceQuality = serviceQuality
         this.roundUpTip = roundUpTip
-        return tipData
+        return getTipData()
     }
 
     private val tipPercentage: Double
@@ -24,19 +24,21 @@ class TipCalculator {
             ServiceQuality.AMAZING -> 0.20
         }
 
-    private val tipAmount: Double
-        get() {
-            var tip = tipPercentage * costOfService
-            if (roundUpTip) tip = kotlin.math.ceil(tip)
-            return tip
-        }
+    private fun getTipAmount(): Double {
+        var tip = tipPercentage * costOfService
+        if (roundUpTip) tip = kotlin.math.ceil(tip)
+        return tip
+    }
 
-    private val tipData: TipData
-        get() = TipData(
+    private fun getTipData(): TipData {
+        val tipAmount = getTipAmount()
+        return TipData(
             costOfService = costOfService,
             serviceQuality = serviceQuality,
             roundUpTip = roundUpTip,
             tipAmount = tipAmount,
             billTotal = costOfService + tipAmount
         )
+    }
+
 }
