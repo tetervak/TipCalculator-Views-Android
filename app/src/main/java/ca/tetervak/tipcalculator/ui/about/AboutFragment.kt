@@ -1,4 +1,4 @@
-package ca.tetervak.tipcalculator.ui.dialogs
+package ca.tetervak.tipcalculator.ui.about
 
 import android.app.Dialog
 import android.os.Bundle

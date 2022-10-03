@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">Tip Calculator</string>
-    <string name="action_settings">Settings</string>
+
+    <!-- menu items -->
+    <string name="history">History</string>
+    <string name="about">About</string>
 
     <!-- about dialog -->
     <string name="author">Alex Tetervak, Sheridan College, 2022</string>
-
-
 
     <!-- Strings used for fragments for navigation -->
     <string name="calculator_fragment_label">Calculator</string>
@@ -13,17 +14,22 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_calculator_fragment">Hello calculator fragment</string>
-    <string name="hello_history_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- common output labels -->
+    <string name="tip_amount">Tip Amount</string>
+    <string name="bill_total">Bill Total</string>
+
+    <!-- calculator fragment -->
     <string name="tip_calculator">Tip Calculator</string>
     <string name="calculate">Calculate</string>
     <string name="cost_of_service">Cost of Service</string>
     <string name="service_quality">Service Quality</string>
-    <string name="textview">TextView</string>
     <string name="round_up_tip">Round Up Tip</string>
-    <string name="tip_amount">Tip Amount</string>
-    <string name="bill_total">Bill Total</string>
     <string name="invalid_input">Invalid Input</string>
-    <string name="history">History</string>
-    <string name="about">About</string>
+
+    <!-- history fragment -->
+    <string name="history_is_empty">The History is Empty</string>
+    <string name="delete_history_item">Delete History Item</string>
+    <string name="date">Date</string>
+    <string name="date_and_time">Date and Time</string>
+    <string name="clear_all_history">Clear All History</string>
 </resources>

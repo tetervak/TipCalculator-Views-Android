@@ -38,7 +38,7 @@ class CalculatorViewModel @Inject constructor(
         saveTipData(tipData)
     }
 
-    fun saveTipData(tipData: TipData){
+    private fun saveTipData(tipData: TipData){
         viewModelScope.launch(Dispatchers.IO){
             repository.insertTipData(tipData)
         }

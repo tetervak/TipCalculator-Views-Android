@@ -66,6 +66,8 @@ dependencies {
     // Needed by Hilt (dependency injection)
     implementation "com.google.dagger:hilt-android:2.42"
     kapt "com.google.dagger:hilt-compiler:2.42"
-    //implementation "androidx.hilt:hilt-navigation-fragment:1.0.0"
+
+    // Needed by asLiveData() in the repository
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
 
 }
