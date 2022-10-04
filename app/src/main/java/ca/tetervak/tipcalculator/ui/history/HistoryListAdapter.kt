@@ -7,17 +7,22 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ca.tetervak.tipcalculator.databinding.HistoryListItemBinding
 
-class HistoryListAdapter :
-    ListAdapter<HistoryItemUiState, HistoryListAdapter.ItemViewHolder>(ITEM_COMPARATOR) {
+class HistoryListAdapter(
+    private val onItemClick: (itemId: Int) -> Unit,
+    private val onItemDelete: (itemId: Int) -> Unit
+) : ListAdapter<HistoryItemUiState, HistoryListAdapter.ItemViewHolder>(ITEM_COMPARATOR) {
 
-    class ItemViewHolder(
+    inner class ItemViewHolder(
         private val binding: HistoryListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(itemUiState: HistoryItemUiState) {
             binding.itemUiState = itemUiState
-            binding.deleteButton.setOnClickListener{
-                itemUiState.onDelete()
+            binding.deleteButton.setOnClickListener {
+                onItemDelete(itemUiState.id)
+            }
+            binding.root.setOnClickListener {
+                onItemClick(itemUiState.id)
             }
         }
     }

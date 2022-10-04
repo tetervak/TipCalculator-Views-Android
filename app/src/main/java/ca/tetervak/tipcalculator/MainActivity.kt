@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_about -> {
-                navController.navigate(R.id.action_global_aboutFragment)
+                navController.navigate(NavGraphDirections.actionGlobalAboutFragment())
                 true
             }
             else -> super.onOptionsItemSelected(item)

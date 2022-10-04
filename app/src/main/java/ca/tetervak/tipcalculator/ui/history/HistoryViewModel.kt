@@ -19,17 +19,15 @@ class HistoryViewModel @Inject constructor(
         repository.getTipDataListFlow().map { tipDataList ->
             tipDataList.map { tipData ->
                 HistoryItemUiState(
+                    id = tipData.id,
                     date = tipData.date,
                     tipAmount = tipData.tipAmount,
-                    billTotal = tipData.billTotal,
-                    onDelete = {
-                        deleteTipDataById(tipData.id)
-                    }
+                    billTotal = tipData.billTotal
                 )
             }
         }.flowOn(Dispatchers.IO).asLiveData()
 
-    private fun deleteTipDataById(id: Int) = viewModelScope.launch(Dispatchers.IO) {
+    fun deleteTipDataById(id: Int) = viewModelScope.launch(Dispatchers.IO) {
         repository.deleteTipDataById(id)
     }
 

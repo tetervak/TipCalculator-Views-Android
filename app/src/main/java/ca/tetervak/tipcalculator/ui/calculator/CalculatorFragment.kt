@@ -8,6 +8,7 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import ca.tetervak.tipcalculator.NavGraphDirections
 import ca.tetervak.tipcalculator.R
 import ca.tetervak.tipcalculator.databinding.FragmentCalculatorBinding
 import ca.tetervak.tipcalculator.model.ServiceQuality
@@ -78,7 +79,7 @@ class CalculatorFragment : Fragment(), MenuProvider {
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when (menuItem.itemId) {
             R.id.action_history -> {
-                findNavController().navigate(R.id.action_global_historyFragment)
+                findNavController().navigate(NavGraphDirections.actionGlobalHistoryFragment())
                 true
             }
             else -> false

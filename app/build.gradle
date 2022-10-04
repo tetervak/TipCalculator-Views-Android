@@ -5,6 +5,8 @@ plugins {
     id 'kotlin-kapt'
     // Needed by Hilt (dependency injection)
     id 'dagger.hilt.android.plugin'
+    // needed for navigation with Safe Args
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -67,7 +69,7 @@ dependencies {
     implementation "com.google.dagger:hilt-android:2.42"
     kapt "com.google.dagger:hilt-compiler:2.42"
 
-    // Needed by asLiveData() in the repository
+    // Needed by asLiveData() and liveData{} in the repository
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
 
 }

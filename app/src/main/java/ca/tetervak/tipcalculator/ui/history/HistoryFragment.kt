@@ -7,6 +7,7 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import ca.tetervak.tipcalculator.NavGraphDirections
 import ca.tetervak.tipcalculator.R
 import ca.tetervak.tipcalculator.databinding.FragmentHistoryBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +32,10 @@ class HistoryFragment : Fragment(), MenuProvider {
             this, viewLifecycleOwner, Lifecycle.State.RESUMED
         )
 
-        val adapter = HistoryListAdapter()
+        val adapter = HistoryListAdapter(
+            onItemClick = { itemId: Int -> showDetails(itemId) },
+            onItemDelete = { itemId: Int -> viewModel.deleteTipDataById(itemId) }
+        )
         binding.recyclerView.adapter = adapter
 
         viewModel.liveItemUiStateList.observe(viewLifecycleOwner){ uiItemStateList ->
@@ -46,6 +50,11 @@ class HistoryFragment : Fragment(), MenuProvider {
         }
 
         return binding.root
+    }
+
+    private fun showDetails(itemId: Int) {
+        val action = HistoryFragmentDirections.actionHistoryFragmentToDetailsFragment(itemId)
+        findNavController().navigate(action)
     }
 
     override fun onDestroyView() {
