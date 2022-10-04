@@ -7,7 +7,6 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
-import ca.tetervak.tipcalculator.NavGraphDirections
 import ca.tetervak.tipcalculator.R
 import ca.tetervak.tipcalculator.databinding.FragmentHistoryBinding
 import dagger.hilt.android.AndroidEntryPoint
