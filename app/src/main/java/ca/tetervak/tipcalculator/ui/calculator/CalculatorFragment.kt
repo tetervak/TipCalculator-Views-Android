@@ -5,19 +5,25 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.*
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import ca.tetervak.tipcalculator.MainViewModel
+import ca.tetervak.tipcalculator.NavGraphDirections
 import ca.tetervak.tipcalculator.R
 import ca.tetervak.tipcalculator.databinding.FragmentCalculatorBinding
 import ca.tetervak.tipcalculator.model.ServiceQuality
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CalculatorFragment : Fragment(), MenuProvider {
 
     private var _binding: FragmentCalculatorBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: CalculatorViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +62,7 @@ class CalculatorFragment : Fragment(), MenuProvider {
                     }
                 val roundUpTip = binding.roundUpTipSwitch.isChecked
                 viewModel.calculate(costOfService, qualityOfService, roundUpTip)
+                mainViewModel.saveTipData(viewModel.tipData)
             } catch (e: NumberFormatException) {
                 binding.costOfServiceInput.error = getString(R.string.invalid_input)
             }
@@ -76,7 +83,7 @@ class CalculatorFragment : Fragment(), MenuProvider {
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when (menuItem.itemId) {
             R.id.action_history -> {
-                findNavController().navigate(R.id.action_global_historyFragment)
+                findNavController().navigate(NavGraphDirections.actionGlobalHistoryFragment())
                 true
             }
             else -> false

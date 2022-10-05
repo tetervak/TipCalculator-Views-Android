@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.calculator.CalculatorFragment">
+    tools:context=".ui.details.DetailsFragment">
 
     <data>
         <variable
             name="viewModel"
-            type="ca.tetervak.tipcalculator.ui.calculator.CalculatorViewModel" />
+            type="ca.tetervak.tipcalculator.ui.details.DetailsViewModel" />
     </data>
 
     <LinearLayout
@@ -17,18 +17,18 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tip_calculator_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="@string/tip_calculator"
-            android:textSize="24sp"
-            android:textColor="@color/pink_500" />
+            android:text="@string/calculation_details"
+            android:textColor="@color/pink_500"
+            android:textSize="24sp" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:elevation="8dp"
             app:cardCornerRadius="8dp">
 
             <TableLayout
@@ -50,16 +50,16 @@
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
-                    <EditText
-                        android:id="@+id/cost_of_service_input"
+                    <TextView
+                        android:id="@+id/cost_of_service_output"
+                        currencyValue="@{viewModel.liveTipData.costOfService}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:ems="5"
-                        android:importantForAutofill="no"
-                        android:inputType="numberDecimal"
-                        android:minHeight="48dp"
-                        tools:ignore="DuplicateSpeakableTextCheck" />
+                        android:textColor="@color/purple_700"
+                        android:textSize="20sp"
+                        tools:text="$30.75" />
+
                 </TableRow>
 
                 <TableRow
@@ -71,44 +71,50 @@
                         android:id="@+id/service_quality_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="end"
                         android:text="@string/service_quality"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
-                    <Spinner
-                        android:id="@+id/service_quality_spinner"
+                    <TextView
+                        android:id="@+id/service_quality_output"
+                        serviceQuality="@{viewModel.liveTipData.serviceQuality}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:minHeight="48dp"
-                        tools:listitem="@layout/quality_input_item" />
+                        android:textColor="@color/purple_700"
+                        android:textSize="20sp"
+                        tools:text="Good (18%)" />
+
                 </TableRow>
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp">
 
-                    <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/round_up_tip_switch"
+                    <TextView
+                        android:id="@+id/round_up_tip_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_span="2"
-                        android:checked="true"
+                        android:gravity="end"
                         android:text="@string/round_up_tip"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/round_up_tip_output"
+                        booleanYesNo="@{viewModel.liveTipData.roundUpTip}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textColor="@color/purple_700"
+                        android:textSize="20sp"
+                        tools:text="Yes" />
                 </TableRow>
 
             </TableLayout>
         </androidx.cardview.widget.CardView>
-
-        <Button
-            android:id="@+id/calculate_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/calculate" />
-
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
@@ -130,19 +136,21 @@
                         android:id="@+id/tip_amount_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="end"
                         android:text="@string/tip_amount"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/tip_amount_output"
-                        currencyValue="@{viewModel.liveUiState.tipAmount}"
+                        currencyValue="@{viewModel.liveTipData.tipAmount}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:textColor="@color/purple_500"
                         android:textSize="20sp"
                         tools:text="$2.00" />
+
                 </TableRow>
 
                 <TableRow
@@ -161,13 +169,77 @@
 
                     <TextView
                         android:id="@+id/bill_total_output"
-                        currencyValue="@{viewModel.liveUiState.billTotal}"
+                        currencyValue="@{viewModel.liveTipData.billTotal}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:textColor="@color/purple_500"
                         android:textSize="20sp"
                         tools:text="$18.27" />
+
+                </TableRow>
+            </TableLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:cardCornerRadius="8dp" >
+
+            <TableLayout
+                android:id="@+id/timestamp_table"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/date_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="@string/date"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/date_value"
+                        dateValue="@{viewModel.liveTipData.date}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textColor="@color/purple_700"
+                        android:textSize="20sp"
+                        tools:text="Tue, Oct 04, 2022" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:id="@+id/time_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="@string/time"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/time_value"
+                        timeValue="@{viewModel.liveTipData.date}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textColor="@color/purple_700"
+                        android:textSize="20sp"
+                        tools:text="5:16:05 PM" />
                 </TableRow>
 
             </TableLayout>

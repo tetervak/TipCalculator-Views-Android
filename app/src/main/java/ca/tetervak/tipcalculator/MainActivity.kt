@@ -10,7 +10,9 @@ import android.view.MenuItem
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import ca.tetervak.tipcalculator.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -44,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_about -> {
-                navController.navigate(R.id.action_global_aboutFragment)
+                navController.navigate(NavGraphDirections.actionGlobalAboutFragment())
                 true
             }
             else -> super.onOptionsItemSelected(item)
