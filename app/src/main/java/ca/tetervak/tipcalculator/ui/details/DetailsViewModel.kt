@@ -1,5 +1,6 @@
 package ca.tetervak.tipcalculator.ui.details
 
+import android.util.Log
 import androidx.lifecycle.*
 import ca.tetervak.tipcalculator.data.TipDataRepository
 import ca.tetervak.tipcalculator.model.TipData
@@ -18,5 +19,9 @@ class DetailsViewModel @Inject constructor(
 
     val liveTipData: LiveData<TipData> = liveData {
         emit(repository.getTipDataById(itemId))
+    }
+
+    init {
+        Log.d("DependencyInjection", "DetailsViewModel is created")
     }
 }

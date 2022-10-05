@@ -1,5 +1,6 @@
 package ca.tetervak.tipcalculator
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ca.tetervak.tipcalculator.data.TipDataRepository
@@ -28,4 +29,8 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteAllTipData()
         }
+
+    init {
+        Log.d("DependencyInjection", "MainViewModel is created")
+    }
 }

@@ -61,8 +61,8 @@ class CalculatorFragment : Fragment(), MenuProvider {
                         else -> ServiceQuality.OK
                     }
                 val roundUpTip = binding.roundUpTipSwitch.isChecked
-                val tipData = viewModel.calculate(costOfService, qualityOfService, roundUpTip)
-                mainViewModel.saveTipData(tipData)
+                viewModel.calculate(costOfService, qualityOfService, roundUpTip)
+                mainViewModel.saveTipData(viewModel.tipData)
             } catch (e: NumberFormatException) {
                 binding.costOfServiceInput.error = getString(R.string.invalid_input)
             }
