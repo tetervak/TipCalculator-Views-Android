@@ -51,9 +51,7 @@ class HistoryListAdapter(
                 oldItem: HistoryItemUiState,
                 newItem: HistoryItemUiState
             ): Boolean {
-                return oldItem.date == newItem.date &&
-                        oldItem.tipAmount == newItem.tipAmount &&
-                        oldItem.billTotal == newItem.billTotal
+                return oldItem.id == newItem.id
             }
         }
     }
