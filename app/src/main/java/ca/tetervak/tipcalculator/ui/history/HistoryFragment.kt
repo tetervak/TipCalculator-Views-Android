@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import ca.tetervak.tipcalculator.MainViewModel
 import ca.tetervak.tipcalculator.R
 import ca.tetervak.tipcalculator.databinding.FragmentHistoryBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,6 +20,7 @@ class HistoryFragment : Fragment(), MenuProvider {
     private val binding get() = _binding!!
 
     private val viewModel: HistoryViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +36,7 @@ class HistoryFragment : Fragment(), MenuProvider {
 
         val adapter = HistoryListAdapter(
             onItemClick = { itemId: Int -> showDetails(itemId) },
-            onItemDelete = { itemId: Int -> viewModel.deleteTipDataById(itemId) }
+            onItemDelete = { itemId: Int -> mainViewModel.deleteTipDataById(itemId) }
         )
         binding.recyclerView.adapter = adapter
 
@@ -68,7 +71,7 @@ class HistoryFragment : Fragment(), MenuProvider {
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when (menuItem.itemId) {
             R.id.action_clear_all_history -> {
-                viewModel.clearAllHistory()
+                mainViewModel.clearAllHistory()
                 true
             }
             else -> false

@@ -5,9 +5,11 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.*
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import ca.tetervak.tipcalculator.MainViewModel
 import ca.tetervak.tipcalculator.NavGraphDirections
 import ca.tetervak.tipcalculator.R
 import ca.tetervak.tipcalculator.databinding.FragmentCalculatorBinding
@@ -21,6 +23,7 @@ class CalculatorFragment : Fragment(), MenuProvider {
     private val binding get() = _binding!!
 
     private val viewModel: CalculatorViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,7 +61,8 @@ class CalculatorFragment : Fragment(), MenuProvider {
                         else -> ServiceQuality.OK
                     }
                 val roundUpTip = binding.roundUpTipSwitch.isChecked
-                viewModel.calculate(costOfService, qualityOfService, roundUpTip)
+                val tipData = viewModel.calculate(costOfService, qualityOfService, roundUpTip)
+                mainViewModel.saveTipData(tipData)
             } catch (e: NumberFormatException) {
                 binding.costOfServiceInput.error = getString(R.string.invalid_input)
             }

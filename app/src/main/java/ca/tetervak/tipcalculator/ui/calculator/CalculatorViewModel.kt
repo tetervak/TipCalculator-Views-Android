@@ -9,15 +9,8 @@ import ca.tetervak.tipcalculator.data.TipDataRepository
 import ca.tetervak.tipcalculator.model.ServiceQuality
 import ca.tetervak.tipcalculator.model.TipCalculator
 import ca.tetervak.tipcalculator.model.TipData
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class CalculatorViewModel @Inject constructor(
-    private val repository: TipDataRepository
-) : ViewModel() {
+class CalculatorViewModel() : ViewModel() {
 
     val tipCalculator = TipCalculator()
 
@@ -28,20 +21,14 @@ class CalculatorViewModel @Inject constructor(
         costOfService: Double,
         serviceQuality: ServiceQuality,
         roundUpTip: Boolean
-    ) {
+    ): TipData {
         val tipData = tipCalculator.calculate(costOfService, serviceQuality, roundUpTip)
         val uiState = _liveUiState.value
         _liveUiState.value = uiState?.copy(
             tipAmount = tipData.tipAmount,
             billTotal = tipData.billTotal
         )
-        saveTipData(tipData)
-    }
-
-    private fun saveTipData(tipData: TipData){
-        viewModelScope.launch(Dispatchers.IO){
-            repository.insertTipData(tipData)
-        }
+        return tipData
     }
 
     init {

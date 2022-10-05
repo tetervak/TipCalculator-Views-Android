@@ -19,8 +19,4 @@ class DetailsViewModel @Inject constructor(
     val liveTipData: LiveData<TipData> = liveData {
         emit(repository.getTipDataById(itemId))
     }
-
-    fun deleteTipData() = viewModelScope.launch(Dispatchers.IO) {
-        repository.deleteTipDataById(itemId)
-    }
 }

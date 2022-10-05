@@ -27,14 +27,6 @@ class HistoryViewModel @Inject constructor(
             }
         }.flowOn(Dispatchers.IO).asLiveData()
 
-    fun deleteTipDataById(id: Int) = viewModelScope.launch(Dispatchers.IO) {
-        repository.deleteTipDataById(id)
-    }
-
-    fun clearAllHistory() = viewModelScope.launch(Dispatchers.IO) {
-        repository.deleteAllTipData()
-    }
-
     init {
         Log.d("DependencyInjection", "HistoryViewModel is created")
     }
