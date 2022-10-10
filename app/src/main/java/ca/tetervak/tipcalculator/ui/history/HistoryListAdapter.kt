@@ -16,13 +16,16 @@ class HistoryListAdapter(
         private val binding: HistoryListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(itemUiState: HistoryItemUiState) {
-            binding.itemUiState = itemUiState
-            binding.deleteButton.setOnClickListener {
-                onItemDelete(itemUiState.id)
-            }
-            binding.root.setOnClickListener {
-                onItemClick(itemUiState.id)
+        fun bind(state: HistoryItemUiState) {
+            with(binding){
+                itemUiState = state
+                deleteButton.setOnClickListener {
+                    onItemDelete(state.id)
+                }
+                root.setOnClickListener {
+                    onItemClick(state.id)
+                }
+                executePendingBindings()
             }
         }
     }
